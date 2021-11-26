@@ -211,4 +211,101 @@ class Admin
     }
     // this function allows the student to add a subiects in total subjects of the student profile..
     
-};
+    void addstsub()
+    {
+        if ((strcmp(::un,rollno)==0))
+        {
+            cout<<"\n\nNew Subject Added Successfully...";
+        }
+    }
+    //this function allows the student to delete a Subject in total subjects of the student profile...
+    
+    void delstsub()
+    {
+        knowstsub();
+        int de=0;
+        if((strcmp(::un,roll)==0))
+        {
+            if(totsub==0||totsub<0)
+            {
+                totsub=0;
+                cout<<"\nNone Subjects Exist....";
+                getch();
+                exit(0);
+            }
+            cout<<"\nEnter the subject No. to be Deleted: ";
+            cin>>de;
+            if(de==totsub)
+            {
+                totsub--;
+                strcpy(subject[totsub]," ");
+            }
+            else if(totsub==1)
+            {
+                totsub=0;
+                strcpy(subject[totsub]," ");
+            }
+            else
+            {
+                de--;
+                strcpy(subject[totsub]," ");
+                for(int p=de;p<totsub;p++)
+                {
+                    strcpy(subject[p],subject[p+1]);
+                }
+                totsub--;
+            }
+               cout<<'\n Records Updated Successfully....";
+            }
+    }
+    //this function allows the student to modify their personal at the student portal
+    
+    void modstprofile()
+    {
+        if ((strcmp(::un,rollno) ==0))
+        {
+            cout<<"\nThe Profile Details are : ";
+            cout<<"\n 1. Student E-Mail : "<<mail;
+            cout<<"\n 2. student Mobile : "<<mobile;
+            int g=-1;
+            cout<<"\n\nEnter the Detail No. to be modified : ";
+            cin>>g;
+            if(g==1)
+            {
+                char nmail[50];
+                cout<<"\nEnter the New Mail Address : ";
+                strcpy(mail,mail);
+                cout<<"\nRecords Updated Successfully....";
+            }
+            else if(g==2)
+            {
+                char nmobile[15];
+                cout<<"\nEnter the New Mobile No. : ";
+                gets(nmobile);
+                strcpy(mobile,nmobile);
+                cout<<"\nRecords Updated Successfully....';
+              }
+            else
+                cout<<"\nInvalid Input Provided....";
+        }
+    }
+    //This function allow the ADMIN to make a new Record Entry for the
+    //different new faculties....new faculty records are updated with the help of this function
+    
+            void getfadata()
+            {
+                cout<<"\nEnter the faculty name : ";
+                gets(name);
+                cout<<"\nEnter the Faculty ID/Roll no. : ";
+                cin>>rollno;
+                cout<<"\nEnter the Faculty Father's Name :";
+                gets(fname);
+                cout<<"\nEnter the E-Mail Id : ";
+                gets(mail);
+                cout<<"\nEnter the Mobile no. : ";
+                gets(mobile);
+                cout<<"\nEnter the Total Subjects : ";
+                cin>>totsub;
+                //cout<<"\nThe total subjects choosen are : "<<totsub;
+                for(int i=0;i<totsub;i++}
+ };
