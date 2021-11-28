@@ -1,9 +1,9 @@
 #include<iostream>
-#include<stdlib.h>
+#include<conio.h>
+#include<cstdlib>
 #include<cstring>
 #include<stdio.h>
 #include<fstream>
-#include<conio.h>
 using namespace std;
 
 char un[20];
@@ -224,7 +224,7 @@ class Admin
     {
         knowstsub();
         int de=0;
-        if((strcmp(::un,roll)==0))
+        if((strcmp(::un,rollno)==0))
         {
             if(totsub==0||totsub<0)
             {
@@ -255,7 +255,7 @@ class Admin
                 }
                 totsub--;
             }
-               cout<<'\n Records Updated Successfully....";
+               cout<<"\n Records Updated Successfully....";
             }
     }
     //this function allows the student to modify their personal at the student portal
@@ -283,7 +283,7 @@ class Admin
                 cout<<"\nEnter the New Mobile No. : ";
                 gets(nmobile);
                 strcpy(mobile,nmobile);
-                cout<<"\nRecords Updated Successfully....';
+                cout<<"\nRecords Updated Successfully....";
               }
             else
                 cout<<"\nInvalid Input Provided....";
@@ -307,5 +307,154 @@ class Admin
                 cout<<"\nEnter the Total Subjects : ";
                 cin>>totsub;
                 //cout<<"\nThe total subjects choosen are : "<<totsub;
-                for(int i=0;i<totsub;i++}
- };
+                for(int i=0;i<totsub;i++){
+                    cout<<"\nEnter the Subject "<<i+1<<"Name : ";
+                    cin>>subject[i];
+                }
+                cout<<"\nCreate your Login Password : ";
+                cin>>passwd;
+                cout<<"\nEnter the Unique Keyword to Recover Password : ";
+                cin>>rpasswd;
+                cout<<"\n\n Please note your Username is ID/Roll no. \n";        
+        }
+        // This function Displays all the relevant information to the admin related
+        // to the Students at the ADMIN portals
+        void stdisplay(){
+            cout<<"\n Students Name                   : "<<name;
+            cout<<"\n Students ID/Roll No             : "<<rollno;
+            cout<<"\n Students Father's Name          : "<<fname;
+            cout<<"\n Students Mobile No              : "<<mobile;
+            cout<<"\n Students E-mail Id              : "<<mail;
+            cout<<"\n Students Subjects               : "<<totsub;
+            for(int i=0;i<totsub;i++){
+                cout<<"\n     Subject  "<<i+1<<" : "<<subject[i];
+            }
+            if(totsub == 0){
+                cout<<"(None Of the Subjects are Specified... )";
+            }
+            
+        }
+
+        // This function displays all the relevant information to the admin related
+        // to the faculty at the Admin portals
+        void fadisplay(){
+            cout<<"\n Faculty Name                   : "<<name;
+            cout<<"\n Faculty ID/Roll No             : "<<rollno;
+            cout<<"\n Faculty Father's Name          : "<<fname;
+            cout<<"\n Faculty Mobile No              : "<<mobile;
+            cout<<"\n Faculty E-mail Id              : "<<mail;
+            cout<<"\n Faculty Subjects               : "<<totsub;
+            for(int i=0;i<totsub;i++){
+                cout<<"\n     Subject  "<<i+1<<" : "<<subject[i];
+            }
+            if(totsub == 0){
+                cout<<"(None Of the Subjects are Specified... )";
+            }
+            
+        }
+ }a;
+ Admin f;
+
+// a & f are the objects of the class Admin
+
+void main(){
+    int ch;
+    system("cls");//Clrscr() was giving errors so i used system("clr")
+    cout<<"\n\n\t\t\tEnter to Coninue ";
+    cout<<"\n\n\t\t\tWelcome to OOP Mini Project Portal ";
+    getch();
+    system("cls");//Clrscr() was giving errors so i used system("clr")
+    cout<<"\n\n\t\t\tPress 1 For Admin Portal ";
+    cout<<"\n\t\t\tPress 2 For Faculty Portal ";
+    cout<<"\n\t\t\tPress 3 For Students Portal ";
+    cout<<"\n\t\t\tEnter Your Choice : ";
+    cin>>ch;
+    system("cls");//Clrscr() was giving errors so i used system("clr")
+    if(ch == 1){
+      char adminuser [20] , adminpass [20]; 
+      cout<<" \n\t\t\tWelcome To Admin Login Portal "; 
+      cout<<"\nEnter the UserName : ";
+      cin>>adminuser;  
+      cout<<"\nEnter the Password : ";
+      int k;
+      for( k=0 ;k<8;k++){
+          adminpass[k] = getch();
+          cout<<"*";
+      }  
+      getch();
+      adminpass[k]=NULL;
+      if((strcmp(adminuser,"admin")==0)&&(strcmp(adminpass,"password")==0)){
+            system("cls");
+      } 
+      else{
+          cout<<"\n\n\t\t\t Invalid Access to Portal ";
+          cout<<"\n\n\t\t\t\t  Thank You !!!";
+          getch();
+          exit(0);
+      } 
+      char opera='y';
+      do{
+          int tmp;
+          cout<<"\n\t\t\t\t Welcome to Admin Panel";
+          cout<<"\n\n Press 1 to Add Faculty Record";
+          cout<<"\n Press 2 to Add Multiple Records of Faculty";
+          cout<<"\n Press 3 to View All Records of Faculty ";
+          cout<<"\n Press 4 to Delete a Faculty Record ";
+          cout<<"\n Press 5 to Add Student Record";
+          cout<<"\n Press 6 to Add Multiple Records of Students ";
+          cout<<"\n Press 7 to View All Records of Students ";          
+          cout<<"\n Press 8 to Delete a Student Record ";
+          cout<<"\n Press 9 to Exit ";
+          cout<<"\n\n Enter Your Choice : ";
+          cin>>tmp;
+          system("cls");//Clrscr() was giving errors so i used system("clr")
+          //This is for entering single faculty Record
+          if(tmp==1){
+              cout<<"\nEnter the Details :- ";
+              fstream fs;
+              fs.open("fainfo.txt", ios::in|ios::out | ios::ate);
+              a.getfadata();
+              fs.write((char *)&a,sizeof(Admin));
+              fs.close();
+              cout<<"\nRecords Entered Successfully..."; 
+          }  
+          //This is for entering multiple faculty Record
+          if(tmp==2){
+              int m=0;  
+              fstream fs;
+              fs.open("fainfo.txt", ios::in|ios::out | ios::ate);
+              
+              do
+              {
+              cout<<"\nEnter the Details :-";
+              a.getfadata();
+              fs.write((char *)&a,sizeof(Admin));
+              cout<<"Press 0 if you want to add More Records : ";
+              cin>>m;
+              }while(m==0);
+              fs.close();
+              cout<<"\nRecords Entered Successfully...";
+          }
+          //This is for entering multiple faculty Record
+          //For viewing all faculty Records
+          if(temp==3){
+              fstream fs;
+              fs.open("fainfo.txt",ios::in);
+              fs.seekg(0);
+              while(!fs.eof()){
+                  fs.read((char *)&a,sizeof(Admin));
+                  a.fadisplay();
+              }
+              fs.close();
+          } 
+          //For viewing all faculty Records
+        //   For Deleting a faculty Record
+          if(temp==4){
+              
+          } 
+        //   For Deleting a faculty Record
+      }while(true);
+    }
+
+
+}
