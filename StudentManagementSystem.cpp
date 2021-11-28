@@ -788,13 +788,13 @@ void main(){
         cout<<"\n\n\t\t\t\tPress y to continue other vise press n";
         cin>>con;
 
-        if (con!= 'y ' && con!='Y') {
+        if (con!= 'y' && con!='Y') {
         system("cls");//Clrscr() was giving errors so i used system("clr") 
         cout<<" \n\n\n \n\n\t\t\t\tThank You !!! "; 
         getch (); 
         exit (0);
         }
-    }while (con== 'y '||con== 'Y');
+    }while (con== 'y'||con== 'Y');
     // End of Faculty View Portal
     // Begin of Student View portal
 
@@ -1011,13 +1011,13 @@ void main(){
         cout<<"\n\n\t\t\t\tPress y to continue other vise press n";
         cin>>moreop;
 
-        if (moreop!= 'y ' && moreop!='Y') {
+        if (moreop!= 'y' && moreop!='Y') {
         system("cls");//Clrscr() was giving errors so i used system("clr") 
         cout<<" \n\n\n \n\n\t\t\t\tThank You !!! "; 
         getch (); 
         exit (0);
         }
-    }while(moreop== 'y '|| moreop== 'Y');
+    }while(moreop== 'y'|| moreop== 'Y');
     
 }  
 
