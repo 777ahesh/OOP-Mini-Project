@@ -437,7 +437,7 @@ void main(){
           }
           //This is for entering multiple faculty Record
           //For viewing all faculty Records
-          if(temp==3){
+          if(tmp==3){
               fstream fs;
               fs.open("fainfo.txt",ios::in);
               fs.seekg(0);
@@ -449,12 +449,578 @@ void main(){
           } 
           //For viewing all faculty Records
         //   For Deleting a faculty Record
-          if(temp==4){
-              
+          if(tmp==4){
+              char tmpfaid[15];
+              int de=0,result=-1;
+              cout<<"\nEnter the Faculty ID/Roll No : ";
+              cin>>tmpfaid;
+              fstream fs;
+              fs.open("fainfo.txt",ios::in);
+              fstream fs1;
+              fs1.open("fanewinfo.txt",ios::out|ios::ate);
+              while(!fs.eof()){
+                  fs.read((char *)&a,sizeof(Admin));
+                  result = strcmp(tmpfaid,a.rollno);
+                  if(result == 0){
+                      de=1;
+                  }
+                  else{
+                      fs1.write((char *)&a,sizeof(Admin));
+                  }
+                } 
+                  if(de == 1){
+                      cout<<"\nRecord Deleted Successfully...";
+                  }else{
+                      cout<<"\nRecord Not Found...";
+                  }
+                  fs.close();
+                  fs1.close();
+                  remove("fainfo.txt");
+                  rename("fanewinfo.txt","fainfo.txt");
           } 
         //   For Deleting a faculty Record
-      }while(true);
+        // For Single Student Record Entry
+          if(tmp == 5)
+          {
+              cout<<"\nEnter the Details :- ";
+              fstream fs;
+              fs.open("stinfo.txt", ios::in|ios::out | ios::ate);
+              a.getstdata();
+              fs.write((char *)&a,sizeof(Admin));
+              fs.close();
+              cout<<"\nRecords Entered Successfully..."; 
+          }
+            // For Single Student Record Entry
+            //for multiple student record input
+           if(tmp==6){
+              int m=0;  
+              fstream fs;
+              fs.open("stinfo.txt", ios::in|ios::out | ios::ate);
+              
+              do
+              {
+              cout<<"\nEnter the Details :-";
+              a.getstdata();
+              fs.write((char *)&a,sizeof(Admin));
+              cout<<"Press 0 if you want to add More Records : ";
+              cin>>m;
+              }while(m==0);
+              fs.close();
+              cout<<"\nRecords Entered Successfully...";
+           } 
+             //for multiple student record input
+            //for view of all student record
+            if(tmp==7){
+              fstream fs;
+              fs.open("stinfo.txt",ios::in);
+              fs.seekg(0);
+              while(!fs.eof()){
+                  fs.read((char *)&a,sizeof(Admin));
+                  a.stdisplay();
+              }
+              fs.close();
+            }
+            //for view of all student record
+            //for deleting a student record 
+            if(tmp==8){
+              char tmpstid[15];
+              int de=0,result=-1;
+              cout<<"\nEnter the Students ID/Roll No : ";
+              cin>>tmpstid;
+              fstream fs;
+              fs.open("stinfo.txt",ios::in);
+              fstream fs1;
+              fs1.open("stnewinfo.txt",ios::out|ios::ate);
+              while(!fs.eof()){
+                  fs.read((char *)&a,sizeof(Admin));
+                  result = strcmp(tmpstid,a.rollno);
+                  if(result == 0){
+                      de=1;
+                  }
+                  else{
+                      fs1.write((char *)&a,sizeof(Admin));
+                  }
+                } 
+                  if(de == 1){
+                      cout<<"\nRecord Deleted Successfully...";
+                  }else{
+                      cout<<"\nRecord Not Found...";
+                  }
+                  fs.close();
+                  fs1.close();
+                  remove("stinfo.txt");
+                  rename("stnewinfo.txt","stinfo.txt");
+            }
+            //for deleting a student record 
+            // For Exit
+            if(tmp==9){
+                cout<<"\n\n\n\n\t\t\t Thank You !!!";
+                getch();
+                exit(0);
+            } 
+            // For Exit
+            //For Invalid Input
+            if(tmp<1 || tmp>9){
+                system("cls");//Clrscr() was giving errors so i used system("clr")
+                cout<<"\n\n\n\n\t\t\t Invalid Input...";
+            } 
+            //For Invalid Input
+            getch();
+            cout<<"\n\nPress y for coninuing Otherwise Press n";
+            cin>>opera;
+            if(opera != 'y'){
+                getch();
+                system("cls");//Clrscr() was giving errors so i used system("clr")
+                cout<<"\n\n\n\n\n\t\t\t\t\tThank You!!!";
+                getch();
+            }//closing of thankyou
+      }while(opera == 'Y'||opera =='y');
+    }//closing of admin login
+
+    // Begin of Faculty View Portal
+    if(ch==2){
+        system("cls");//Clrscr() was giving errors so i used system("clr")
+        char un[20];
+        int val ,s=0;
+        cout<<"\n\t\tWelcome to Faculty Login Page ";
+        cout<<"\n\nEnter the Username : ";
+        cin>>::un;
+        fstream fs;
+        fs.open("fainfo.txt",ios::in|ios::binary);
+        fs.seekg(0);
+        while(!fs.eof()){
+            val =-1;
+            fs.read((char *)&f,sizeof(Admin));
+            val=f.login();
+            if(val==1){
+                s=1;
+                break;
+            }
+        }
+        fs.close();
+        //if First Login is valid
+        if(s==1){
+            system("cls");//Clrscr() was giving errors so i used system("clr")
+        }
+        //if First Login is valid
+
+        // If first Login is Invalid then
+        if(s!=1){
+            system("cls");//Clrscr() was giving errors so i used system("clr")
+            int ho = 0;
+            cout<<"\n\n\t\tYour Login Credentials are In-Correct";
+            cout<<"\nThe username is Your id/RollNo";
+            cout<<"\nThe Password is Case-Sensitive";
+            cout<<"\n1.Press 1 to recover Password ";
+            cout<<"\n2.Press 2 to to Reattempt with Login ";
+            cout<<"\nEnter Your Choice : ";
+            cin>>ho;
+            // Recover Password
+            if(ho==1){
+                cout<<"\nEnter the Username : ";
+                cin>>::un;
+                fstream fs;
+                fs.open("fainfo.txt",ios::in|ios::binary);
+                fs.seekg(0);
+                int re,su=-1;
+                while(!fs.eof()){
+                    re=-1;
+                    fs.read((char *)&f,sizeof(Admin));
+                    re=f.recover();
+                    if(re==1){
+                        su=1;
+                        break;
+                    }
+                }
+                fs.close();
+                if(su==1){
+                    getch();
+                    system("cls");//Clrscr() was giving errors so i used system("clr")
+                    cout<<"\n\n\n\n\t\t\tThank You!!!";
+                    getch();
+                    exit(0);
+                }
+                else{
+                    cout<<"\nYou are a Invalid User ";
+                    getch();
+                    exit(0);
+                }
+            }
+            // Recover Password
+            // Reattempt of Login
+                if(ho ==2){
+                    cout<<"\n\nEnter the Username : ";
+                    cin>>::un;
+                    fstream fs;
+                    fs.open("fainfo.txt",ios::in |ios::binary);
+                    fs.seekg(0);
+                    int suc = -1,valu;
+                    while(!fs.eof()){
+                        valu =-1;
+                        fs.read((char *)&f,sizeof(Admin));
+                        valu = f.login();
+                        if(valu == 1){
+                            suc = 1;
+                            break;
+                        }
+                    }
+                    fs.close();
+                    if(suc==1){
+                        system("cls");//Clrscr() was giving errors so i used system("clr")
+                    }else{
+                    getch();
+                    cout<<"\n You are a Invalid User ...";
+                    cout<<"\n\n\n\n\t\t\tThank You!!!";
+                    getch();
+                    exit(0);
+                    exit(0);
+                    }
+
+                }
+            if(ho!= 1 || ho!=2){
+                cout<<" \n\nInvalid Input Provided. ";
+                cout<<" \n\n\t\t\tThank You !!!", 
+                getch (); 
+                exit (0);  
+            }
+            // Reattempt of Login
+        } 
+        // If first Login is Invalid then 
     }
+    char con='y';
+    do{
+        system("cls");//Clrscr() was giving errors so i used system("clr")
+        cout<<" \n\n\t\t\twelcome to Faculty Panel ";
+        cout<<" \n\n\t\t\t\t\t\t Your UserId is "<<::un; 
+        cout<<" \n\nPress 1 to View Your Profile. "; 
+        cout<<" \nPress 2 to Know Your Subjects. "; 
+        cout<<" \nPress 3 to Add a Subject."; 
+        cout<<" \nPress 4 to Delete a Subject . "; 
+        cout<<" \nPress 5 to Modify Your Profile. ";
+        int choice;
+        cout<<"\n\nEnter Your Choice : ";
+        cin>>choice;
+        if(choice==1){
+            fstream fs;
+            fs.open("fainfo.txt",ios::in);
+            fs.seekg(0);
+            int x;
+            while(!fs.eof()){
+                x=0;
+                fs.read((char *)&f,sizeof(Admin));
+                x=f.faprofile();
+                if(x==1){
+                    break;
+                }
+            }
+            fs.close();
+        }//closing of choice == 1
+        if(choice==2){
+            fstream fs;
+            fs.open("fainfo.txt",ios::in);
+            fs.seekg(0);
+            int y;
+            while(!fs.eof()){
+                y=0;
+                fs.read((char *)&f,sizeof(Admin));
+                int y=f.knowfasub();
+                if(y==1){
+                    break;
+                }
+            }
+            fs.close();
+        }//closing of choice == 2
+
+        if(choice==3){
+            fstream fs;
+            fstream fs1;
+            fs.open ("fainfo.txt", ios::in|ios::binary); 
+            fs1.open ("tmpfainfo.txt", ios::out |ios::ate);
+            fs.seekg(0);
+            while(!fs.eof()){
+                fs.read((char *)&f,sizeof(Admin));
+                f.addfasub();
+                fs1.write((char *)&f, sizeof(Admin));
+            }
+            fs.close();
+            fs1.close();
+            remove("fainfo.txt");
+            rename("tmpfainfo.txt","fainfo.txt");
+        }//closing of choice == 3
+        if(choice ==4){
+            fstream fs;
+            fs.open("fainfo.txt",ios::in|ios::binary);
+            fstream fs1;
+            fs1.open("delfainfo.txt",ios::out|ios::ate);
+            fs.seekg(0);
+            while(!fs.eof()){
+                fs.read((char *)&f,sizeof(Admin));
+                f.delfasub();
+                fs1.write((char *)&f,sizeof(Admin));
+            }
+            fs.close();
+            fs1.close();
+            remove("fainfo.txt");
+            rename("delfainfo.txt","fainfo.txt");
+        }//closing of choice==4
+        if(choice==5){
+            fstream fs;
+            fstream fs1;
+            fs.open("fainfo.txt",ios::in|ios::binary);
+            fs.seekg(0);
+            fs1.open("modfainfo.txt",ios::out|ios::ate);
+            while(!fs.eof()){
+                fs.read((char *)&f,sizeof(Admin));
+                f.modfaprofile();
+                fs1.write((char *)&f,sizeof(Admin));
+            }
+            fs.close();
+            fs1.close();
+            remove("fainfo.txt");
+            rename("modfainfo.txt","fainfo.txt");
+        } //end of choice == 5
+
+        if (choice<1 || choice>5){
+            cout<<"\nInvalid Input...";
+        }
+        cout<<"\n\n\t\t\tPress Enter to continue";
+        getch();
+        cout<<"\n\n\t\t\t\tPress y to continue other vise press n";
+        cin>>con;
+
+        if (con!= 'y ' && con!='Y') {
+        system("cls");//Clrscr() was giving errors so i used system("clr") 
+        cout<<" \n\n\n \n\n\t\t\t\tThank You !!! "; 
+        getch (); 
+        exit (0);
+        }
+    }while (con== 'y '||con== 'Y');
+    // End of Faculty View Portal
+    // Begin of Student View portal
+
+      if(ch==3){
+        system("cls");//Clrscr() was giving errors so i used system("clr")
+        // char un[20];
+        int value ,s1=0;
+        cout<<"\n\t\tWelcome to Students Login Page ";
+        cout<<"\n\nEnter the Username : ";
+        cin>>::un;
+        fstream fs;
+        fs.open("stinfo.txt",ios::in|ios::binary);
+        fs.seekg(0);
+        while(!fs.eof()){
+            value =-1;
+            fs.read((char *)&f,sizeof(Admin));
+            value=f.login();
+            if(value==1){
+                s1=1;
+                break;
+            }
+        }
+        fs.close();
+        //if First Login is valid
+        if(s1==1){
+            system("cls");//Clrscr() was giving errors so i used system("clr")
+            //Welcome to Students Login Page first input is valid
+        }
+        //if First Login is valid
+
+        // If first Login is Invalid then
+        if(s1!=1){
+            system("cls");//Clrscr() was giving errors so i used system("clr")
+            int sho = 0;
+            cout<<"\n\n\t\tYour Login Credentials are In-Correct";
+            cout<<"\nThe username is Your id/RollNo";
+            cout<<"\nThe Password is Case-Sensitive";
+            cout<<"\n1.Press 1 to recover Password ";
+            cout<<"\n2.Press 2 to to Reattempt with Login ";
+            cout<<"\nEnter Your Choice : ";
+            cin>>sho;
+            // Recover Password
+            if(sho==1){
+                cout<<"\nEnter the Username : ";
+                cin>>::un;
+                fstream fs;
+                fs.open("stinfo.txt",ios::in|ios::binary);
+                fs.seekg(0);
+                int re,su=-1;
+                while(!fs.eof()){
+                    re=-1;
+                    fs.read((char *)&f,sizeof(Admin));
+                    re=f.recover();
+                    if(re==1){
+                        su=1;
+                        break;
+                    }
+                }
+                fs.close();
+                if(su==1){
+                    getch();
+                    system("cls");//Clrscr() was giving errors so i used system("clr")
+                    cout<<"\n\n\n\n\t\t\tThank You!!!";
+                    getch();
+                    exit(0);
+                }
+                else{
+                    cout<<"\nYou are a Invalid User ";
+                    cout<<"\nThank You !!! ";
+                    getch();
+                    exit(0);
+                }
+            }
+            // Recover Password
+            // Reattempt of Login
+                if(sho ==2){
+                    cout<<"\n\nEnter the Username : ";
+                    cin>>::un;
+                    fstream fs;
+                    fs.open("stinfo.txt",ios::in |ios::binary);
+                    fs.seekg(0);
+                    int suc = -1,valu;
+                    while(!fs.eof()){
+                        valu =-1;
+                        fs.read((char *)&f,sizeof(Admin));
+                        valu = f.login();
+                        if(valu == 1){
+                            suc = 1;
+                            break;
+                        }
+                    }
+                    fs.close();
+                    if(suc==1){
+                        system("cls");//Clrscr() was giving errors so i used system("clr")
+                    }else{
+                    getch();
+                    cout<<"\n You are a Invalid User ...";
+                    cout<<"\n\n\n\n\t\t\tThank You!!!";
+                    getch();
+                    exit(0);
+                    exit(0);
+                    }
+
+                }
+            if(sho!= 1 || sho!=2){//corrections
+                cout<<" \n\nInvalid Input Provided. ";
+                cout<<" \n\n\t\t\tThank You !!!", 
+                getch (); 
+                exit (0);  
+            }
+            // Reattempt of Login
+        } 
+        // If first Login is Invalid then 
+    }
+    // Begin of Student Panel
+    char moreop='y';
+    do{
+        system("cls");//Clrscr() was giving errors so i used system("clr")
+        cout<<" \n\n\t\t\twelcome to Student Panel ";
+        cout<<" \n\n\t\t\t\t\t\t Your UserId is "<<::un; 
+        cout<<" \n\nPress 1 to View Your Profile. "; 
+        cout<<" \nPress 2 to Know Your Subjects. "; 
+        cout<<" \nPress 3 to Add a Subject."; 
+        cout<<" \nPress 4 to Delete a Subject . "; 
+        cout<<" \nPress 5 to Modify Your Profile. ";
+        int inchoice;
+        cout<<"\n\nEnter Your Choice : ";
+        cin>>inchoice;
+        if(inchoice==1){
+            fstream fs;
+            fs.open("stinfo.txt",ios::in);
+            fs.seekg(0);
+            int x;
+            while(!fs.eof()){
+                x=0;
+                fs.read((char *)&f,sizeof(Admin));
+                x=f.stprofile();
+                if(x==1){
+                    break;
+                }
+            }
+            fs.close();
+        }//closing of inchoice == 1
+        if(inchoice==2){
+            fstream fs;
+            fs.open("stinfo.txt",ios::in);
+            fs.seekg(0);
+            int y;
+            while(!fs.eof()){
+                y=0;
+                fs.read((char *)&f,sizeof(Admin));
+                int y=f.knowstsub();
+                if(y==1){
+                    break;
+                }
+            }
+            fs.close();
+        }//closing of inchoice == 2
+
+        if(inchoice==3){
+            fstream fs;
+            fstream fs1;
+            fs.open ("stinfo.txt", ios::in|ios::binary); 
+            fs1.open ("tmpstinfo.txt", ios::out |ios::ate);
+            fs.seekg(0);
+            while(!fs.eof()){
+                fs.read((char *)&f,sizeof(Admin));
+                f.addstsub();
+                fs1.write((char *)&f, sizeof(Admin));
+            }
+            fs.close();
+            fs1.close();
+            remove("stinfo.txt");
+            rename("tmpstinfo.txt","stinfo.txt");
+        }//closing of inchoice == 3
+        if(inchoice ==4){
+            fstream fs;
+            fs.open("stinfo.txt",ios::in|ios::binary);
+            fstream fs1;
+            fs1.open("delstinfo.txt",ios::out|ios::ate);
+            fs.seekg(0);
+            while(!fs.eof()){
+                fs.read((char *)&f,sizeof(Admin));
+                f.delstsub();
+                fs1.write((char *)&f,sizeof(Admin));
+            }
+            fs.close();
+            fs1.close();
+            remove("stinfo.txt");
+            rename("delstinfo.txt","stinfo.txt");
+        }//closing of inchoice==4
+        if(inchoice==5){
+            fstream fs;
+            fstream fs1;
+            fs.open("stinfo.txt",ios::in|ios::binary);
+            fs.seekg(0);
+            fs1.open("modstinfo.txt",ios::out|ios::ate);
+            while(!fs.eof()){
+                fs.read((char *)&f,sizeof(Admin));
+                f.modstprofile();
+                fs1.write((char *)&f,sizeof(Admin));
+            }
+            fs.close();
+            fs1.close();
+            remove("stinfo.txt");
+            rename("modstinfo.txt","stinfo.txt");
+        } //end of inchoice == 5
+
+        if (inchoice<1 || inchoice>5){
+            cout<<"\nInvalid Input...";
+        }
+        cout<<"\n\n\t\t\tPress Enter to continue";
+        getch();
+        cout<<"\n\n\t\t\t\tPress y to continue other vise press n";
+        cin>>moreop;
+
+        if (moreop!= 'y ' && moreop!='Y') {
+        system("cls");//Clrscr() was giving errors so i used system("clr") 
+        cout<<" \n\n\n \n\n\t\t\t\tThank You !!! "; 
+        getch (); 
+        exit (0);
+        }
+    }while(moreop== 'y '|| moreop== 'Y');
+    
+}  
+
+    // End of Student View portal
 
 
-}
