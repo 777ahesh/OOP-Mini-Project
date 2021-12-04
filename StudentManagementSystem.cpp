@@ -494,6 +494,7 @@ void sortmark()
          }
      
 /*******************DISPLAYING THE SORTED RECORDS*******************/
+
          cout<<"\n\n\n\n\n\n";
          cout<<"\t\t\t"<<"-------------------------------"<<"\n";     
          cout<<"\t\t\t"<<"   SL. NO:"<<"\t"<<"MARKS"<<"\t"<<"NAME"<<"\n";
@@ -535,25 +536,14 @@ void statistics()
 /**********************DISPLAYING INTRODUCTION**********************/
 void Intro()
 {
-     cout<<"\n\n\n\n\n\n\n\n\n\n\n\t\tA Mini Project BY ";
-     cout<<"\n\t\tMahesh Gaikwad & Kundan Agarwal ";
-     Sleep(3000);
      system("cls");
-     for(int i=1;i<=100;++i)
-     {
-         Sleep(5);
-         system("cls");
-         cout<<"\n\n\n\n\n\n\n\n\n\n\n\t\t\t\tWELCOME TO";
-         cout<<"\n\n\n\n\n\n\n\n\n\n\n\n\t\t\t\t\t\t\t\tLOADING "<<i<<"%";
-         if(i==100)
-         {
-             Sleep(1000);
-         }
-     }
+     cout<<"\n\n\n\n\n\n\n\n\n\n\n\t\t\tSTUDENT MANAGEMENT SYSTEM";   
+     getch();
+     cout<<"\n\t\t\t\tA Mini Project BY ";
+     cout<<"\n\t\t\t\tMahesh Gaikwad & Kundan Agarwal ";
+     getch();
      system("cls");
-     cout<<"\n\n\n\n\n\n\n\n\n\n\n\t\t\tSTUDENT MANAGEMENT SYSTEM";
-     Sleep(3000);
-     system("cls"); 
+      
 }
 
 /*******************SPLITTING INTO DIFFERENT USERS*******************/
@@ -562,16 +552,38 @@ void Segregation()
      int n;
      start:
      system("cls");
-     cout<<"\n\n\n\n\n";
-     cout<<"\t\t\t      ---------------"<<"\n";
-     cout<<"\t\t\t         MAIN MENU"<<"\n";
-     cout<<"\t\t\t      ---------------"<<"\n\n\n";
-     cout<<"\t\t\t     SELECT DESIGNATION"<<"\n\n";
-     cout<<"\t\t-------------------------------------------"<<"\n";
-     cout<<"\t\t  1. TEACHER\t2. STUDENT\t3. PUBLIC"<<"\n";
-     cout<<"\t\t-------------------------------------------"<<"\n\n";
-     cout<<"\t\t             (PRESS 4 TO EXIT)"<<"\n\n\n"; 
-     cout<<"\t\t       ENTER AN OPTION: ";
+     char r1=201,r2=200,r3=188,r4=187,r5=205,r6=186,r7=220,r8=202,r9=204,r10=203,r11=206,r12=185;
+     cout<<"\n";
+    for(int i=0;i<89;i++)
+    cout<<r7;
+    cout<<endl;
+    cout<<"\n    "<<r1<<r5<<r5<<r5<<r5<<r5<<r5<<r5<<r5<<r5<<r5<<r4<<"   INTERNATIONAL INSTITUTE OF INFORMATION TECHNOLOGY"<<endl;
+    cout<<"    "<<r6<<"   I2IT   "<<r6<<"                Affilated to SPPU\n";
+    cout<<"    "<<r2<<r5<<r5<<r5<<r5<<r5<<r5<<r5<<r5<<r5<<r5<<r3<<"     Approved to AICTE, RECOGNIZED BY DTE, Govt.\n";
+    cout<<"                     Accredited with Grade B++ by NAAC.\n";
+   
+    for(int i=0;i<89;i++)
+    cout<<r7;
+    cout<<"\n\n\t\t\t\t "<<r1;
+    for(int i=1;i<27;i++)
+        cout<<r5;
+    cout<<r4<<endl;
+    cout<<"\t\t\t\t "<<r6<<"       HOME SECTION       "<<r6<<endl;
+    cout<<"\t\t\t\t "<<r2;
+    for(int i=1;i<27;i++)
+        cout<<r5;
+    cout<<r3<<endl;
+     
+     cout<<endl;
+     cout<<"\t\t\t         ---------------"<<"\n";
+     cout<<"\t\t\t            MAIN MENU"<<"\n";
+     cout<<"\t\t\t         ---------------"<<"\n\n\n";
+     cout<<"\t\t\t        SELECT DESIGNATION"<<"\n\n";
+     cout<<"\t\t   -------------------------------------------"<<"\n";
+     cout<<"\t\t\t\t     1.TEACHER\n\t\t\t\t     2.STUDENT\n\t\t\t\t     3.PUBLIC"<<"\n";
+     cout<<"\t\t   -------------------------------------------"<<"\n\n";
+     cout<<"\t\t                (PRESS 4 TO EXIT)"<<"\n\n\n"; 
+     cout<<"\t\t          ENTER AN OPTION: ";
      cin>>n;
      system("cls");
      switch(n)
@@ -739,6 +751,8 @@ void SEQUENCE()
      Intro();
      Segregation();
 }
+
+
 
 /***************************MAIN FUNCTION***************************/
 int main()
