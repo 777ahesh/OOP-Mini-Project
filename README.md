@@ -39,7 +39,7 @@ HARDWARE:
 -	GB of RAM
 -	1GB Storage
  
-### 1.4 References
+### 1.4 Acknowledgment (References)
 - Stackoverflow
 - Geek for Geeks 
 - Google 
