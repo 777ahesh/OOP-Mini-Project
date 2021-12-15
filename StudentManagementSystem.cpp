@@ -2,7 +2,7 @@
 #include<conio.h>
 #include<fstream>
 #include<string.h>
-#include<process.h>
+// #include<process.h>
 #include<windows.h>
 
 using namespace std;
@@ -589,7 +589,7 @@ void Segregation()
      switch(n)
      {
               case 1: system("cls");
-                    //   Password();
+                      Password();
                       Teacher();  
                       break;
               case 2: Student();
